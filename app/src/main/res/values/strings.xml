@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Git Explorer</string>
+    <string name="title_home">@string/app_name</string>
+    <string name="label_hint">Enter an organization to search</string>
+    <plurals name="label_stars">
+        <item quantity="one">1 star</item>
+        <item quantity="other">%d stars</item>
+    </plurals>
+    <plurals name="label_watchers">
+        <item quantity="one">1 watcher</item>
+        <item quantity="other">%d watchers</item>
+    </plurals>
+    <string name="label_error_no_repo">Looks like this organization doesn\'t have a repository yet.</string>
+    <string name="label_error_network">We were unable to find this organization.\nPlease check your spelling, and make sure you\'re connected to Internet.</string>
+</resources>
