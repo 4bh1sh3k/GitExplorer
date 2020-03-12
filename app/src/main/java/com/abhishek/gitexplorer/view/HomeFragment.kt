@@ -3,6 +3,8 @@ package com.abhishek.gitexplorer.view
 import android.content.Context
 import android.net.Uri
 import android.os.Bundle
+import android.os.Handler
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -29,6 +31,8 @@ class HomeFragment : Fragment() {
 
     private val disposables = CompositeDisposable()
 
+    private lateinit var listener: LoadOnScrollListener
+
     override fun onAttach(context: Context) {
         AndroidSupportInjection.inject(this)
         super.onAttach(context)
@@ -41,8 +45,24 @@ class HomeFragment : Fragment() {
     ): View? {
         val binding = LayoutHomeBinding.inflate(inflater, container, false)
         binding.viewModel = viewModel
+
+        // experimental zone
+
+        listener = LoadOnScrollListener {
+            Log.e("Abhishek", "Load moar")
+            Handler().postDelayed({ stopLoading() }, 3000)
+        }
+
+        binding.listRepository.addOnScrollListener(listener)
+
+        // end zone
+
         disposables += viewModel.getEvents().subscribeBy { handleViewModelEvents(it) }
         return binding.root
+    }
+
+    private fun stopLoading() {
+        listener.setLoadComplete()
     }
 
     private fun handleViewModelEvents(event: HomeViewModel.Event) {
